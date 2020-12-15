@@ -15,17 +15,26 @@ class UserController extends Controller
 {
     public function login(Request $request)
     {
+
+
         try {
+
+
             // validasi input
-            $request->validate([
-                'email'     => 'email|required',
-                'password'  => 'required'
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email',
+                'password' => 'required'
             ]);
+
+            if ($validator->fails()) {
+                return response()->json($validator->errors(), 400);
+            }
 
             // cek Credentials Login
 
             $credentials = request(['email', 'password']);
-
+            // var_dump($credentials);
+            // die;
             if (!Auth::attempt($credentials)) {
                 return ResponseFormatter::error([
                     'message' => 'Unauthorized'

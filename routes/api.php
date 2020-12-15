@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\TransactionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::POST('user', [UserController::class, 'updateProfile']);
     Route::POST('user/photo', [UserController::class, 'updatePhoto']);
     Route::POST('logout', [UserController::class, 'logout']);
+
+    Route::GET('transaction', [TransactionController::class, 'all']);
+    Route::POST('transaction/{id}', [TransactionController::class, 'update']);
 });
 
 Route::POST('login', [UserController::class, 'login']);
