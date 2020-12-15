@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\FoodController;
+use App\Http\Controllers\API\MidtransController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\TransactionController;
 use Illuminate\Http\Request;
@@ -31,3 +32,5 @@ Route::POST('login', [UserController::class, 'login']);
 Route::POST('register', [UserController::class, 'register']);
 
 Route::GET('food', [FoodController::class, 'all']);
+
+Route::POST('midtrans/callback', [MidtransController::class, 'midtransCallback']);
