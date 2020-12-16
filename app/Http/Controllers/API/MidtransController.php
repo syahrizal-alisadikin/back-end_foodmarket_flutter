@@ -55,4 +55,19 @@ class MidtransController extends Controller
         // Simpan Transaction 
         $transaction->save();
     }
+
+    public function success()
+    {
+        return view('midtrans.success');
+    }
+
+    public function unfinish()
+    {
+        return view('midtrans.unfinish');
+    }
+
+    public function error()
+    {
+        return view('midtrans.error');
+    }
 }
