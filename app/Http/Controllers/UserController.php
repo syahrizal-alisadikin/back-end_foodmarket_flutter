@@ -55,6 +55,8 @@ class UserController extends Controller
         $data = $request->all();
         $data['picturePath'] = $request->file('picturePath')->store('assets/user', 'public');
         $data['password'] = Hash::make($request->password);
+        $data['current_team_id'] = 1;
+
         User::create($data);
 
         return redirect()->route('users.index')->with('success', 'User Berhasil Ditambahkan!!');
@@ -99,7 +101,8 @@ class UserController extends Controller
             $data['picturePath'] = $request->file('picturePath')->store('assets/user', 'public');
         }
         $data['password'] = Hash::make($request->password);
-
+        $data['current_team_id'] = 1;
+        // dd($data);
         $user->update($data);
 
         return redirect()->route('users.index');
@@ -111,8 +114,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect()->route('users.index');
     }
 }
